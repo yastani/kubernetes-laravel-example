@@ -3,11 +3,6 @@ Docker for Macとhelmとskaffoldでローカル環境にLaravelを構築する
 
 ## 手順
 
-### skaffold devを実行
-```bash
-$ echo {} > ~/.docker/config.json
-```
-
 ### helmの初期化およびnginx-ingressのインストール
 ```bash
 $ $ kubectl config use-context docker-for-desktop
