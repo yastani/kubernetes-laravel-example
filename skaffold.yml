@@ -1,0 +1,16 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - imageName: sample-app/app-dev # 好きなコンテナ名を指定してOK
+      workspace: .
+      docker:
+        dockerfilePath: Dockerfile # skaffold.yamlと同じディレクトリ
+  local:
+    skipPush: true
+deploy:
+  kubectl:
+    manifests:
+      - manifests/* # skaffoldがmanifestファイルの変更を反映してくれる

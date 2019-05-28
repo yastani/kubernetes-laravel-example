@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sample-app
+spec:
+  replicas: 2 # Podの数
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100% # ローリングアップデート時に許容できる超過して作られる Pod の最大数
+      maxUnavailable: 0 # 最低 1 pod は ready な状態を保つ
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: sample-app
+          image: sample-app/app-dev:latest # Dockerイメージを指定
+          envFrom:
+            - configMapRef:
+                name: sample-app-config # configmapの名前を指定
+          ports:
+            - containerPort: 80
